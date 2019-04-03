@@ -10,6 +10,12 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
+import com.tedugroup.WCGroupingComparator;
+
+/**
+ * @author Administrator
+ *
+ */
 public class WCDriver {
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 		Configuration conf = new Configuration();
@@ -27,6 +33,8 @@ public class WCDriver {
 		//指定reduce的key和value类型
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(LongWritable.class);
+		job.setOutputFormatClass(WCOutPutFormat.class);
+		
 		//指定任务操作的资源的位置
 		FileInputFormat .setInputPaths(job, new Path("hdfs://hadoop01:9000/park/word"));
 		//指定任务操作结束后结果保存的类型
